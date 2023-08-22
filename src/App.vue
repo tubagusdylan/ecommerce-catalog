@@ -6,7 +6,6 @@
 
 <script>
 import ProductDisplay from "./components/ProductDisplay.vue";
-import "./assets/styles/page.css";
 
 export default {
   name: "App",
