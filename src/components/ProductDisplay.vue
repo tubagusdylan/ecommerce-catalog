@@ -1,7 +1,7 @@
 <template>
   <div class="product-card">
     <div class="image-product">
-      <img :src="image" alt="gambar" width="80%" />
+      <img :src="image" alt="gambar" width="70%" />
     </div>
     <div class="detail-product">
       <h1 class="product-title" :class="[category === 'men\'s clothing' ? 'men-colors' : 'women-colors']">{{ title }}</h1>
@@ -22,7 +22,7 @@
       <h2 class="product-price" :class="[category === 'men\'s clothing' ? 'men-colors' : 'women-colors']">{{ "$" + price }}</h2>
       <div class="button-wrap">
         <button class="button-buy" :class="[category === 'men\'s clothing' ? 'men-bg-colors' : 'women-bg-colors']">Buy Now</button>
-        <button class="button-next" :class="[category === 'men\'s clothing' ? 'men-btn-colors' : 'women-btn-colors']">Next Product</button>
+        <button @click="$emit('nextProduct')" class="button-next" :class="[category === 'men\'s clothing' ? 'men-btn-colors' : 'women-btn-colors']">Next Product</button>
       </div>
     </div>
   </div>
@@ -69,17 +69,18 @@ export default {
         men_text: "#3f3f3f",
         women_dark_pink: "#720060",
         black: "#1e1e1e",
-        grey: "#dcdcdc",
         white: "#fff",
       },
     };
   },
+  emits: ["nextProduct"],
 };
 </script>
 
 <style scoped>
 .product-card {
   width: 80%;
+  height: 80vh;
   background-color: v-bind("theme.white");
   display: flex;
   padding: 3rem 5rem;
@@ -89,6 +90,7 @@ export default {
 
 .image-product {
   width: 40%;
+  animation: show 0.5s ease-in-out;
 }
 
 .detail-product {
@@ -97,12 +99,14 @@ export default {
 
 .product-title {
   margin-bottom: 16px;
+  animation: show 0.5s ease-in-out;
 }
 
 .product-info {
   display: flex;
   justify-content: space-between;
   margin-bottom: 12px;
+  animation: show 0.5s ease-in-out;
 }
 
 .product-rating {
@@ -113,16 +117,19 @@ export default {
 .product-desc {
   margin-top: 2rem;
   height: 50%;
-  font-size: 20px;
+  font-size: 18px;
+  animation: show 0.5s ease-in-out;
 }
 
 .product-price {
   margin: 12px 0;
+  animation: show 0.5s ease-in-out;
 }
 
 .button-wrap {
   width: 100%;
   text-align: center;
+  animation: show 0.5s ease-in-out;
 }
 
 button {
@@ -177,5 +184,19 @@ button {
 .women-bg-colors {
   background-color: v-bind("theme.women_dark_pink");
   border: 4px solid v-bind("theme.women_dark_pink");
+}
+
+@keyframes show {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }
 </style>
